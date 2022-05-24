@@ -1,3 +1,5 @@
+#가상환경 접속 : E:\backend\django\mysite>mysite.cmd
+#가상환경 종료 : deactivate
 from multiprocessing import context
 #from django.shortcuts import render
 

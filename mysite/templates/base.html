@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!--필요한 메타 태그-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <!--부트스트랩 CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!--마이앱 CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <title>Hello, myapp!</title>
+</head>
+<body>
+    <!--기본 탬플릿 안에 삽입될 내용 시작-->
+    {% block content %}
+    {% endblock %}
+    <!--기본 탬플릿 안에 삽입될 내용 끝-->
+</body>
+</html>

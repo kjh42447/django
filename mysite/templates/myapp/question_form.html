@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-3">
+    <h5 class='my-3 border-bottom pb-2'>질문등록</h5>
+    <form method="post">        <!--action을 설정하지 않으면 현재 url이 디폴트로 설정됨, 다른 함수에서도 동일한 템플릿 사용을 위해 비워둠-->
+        {% csrf_token %}
+
+        <!--오류표시 시작-->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!--오류표시 끝-->
+        
+        <div class="mb-3">
+            <label for="subject" class="form-label">제목</label>
+            <input type="text" class="form-control" name="subject" id="subject" value="{{ form.subject.value|default_if_none:'' }}">    <!--value : 오류가 발생했을 경우 기존 값을 유지-->
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea class="form-control" name="content" id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">저장하기</button>
+    </form>
+</div>
+
+{% endblock %}

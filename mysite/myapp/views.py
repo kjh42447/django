@@ -1,6 +1,7 @@
 #가상환경 접속 : E:\backend\django\mysite>mysite.cmd
 #가상환경 종료 : deactivate
 #주석 단축키 : ctrl + /
+import imp
 from multiprocessing import context
 from venv import create
 #from django.shortcuts import render
@@ -11,12 +12,16 @@ from django.utils import timezone
 from django.http import HttpResponseNotAllowed
 from .models import Question
 from .forms import QuestionForm, AnswerForm
+from django.core.paginator import Paginator
 
 #브라우저 출력
 #질문 목록 화면
 def index(request):
+    page = request.GET.get('page', '1')     #디폴트 페이지 : 1
     question_list = Question.objects.order_by('-create_date')
-    context = {"question_list" : question_list}
+    paginator = Paginator(question_list, 10)    #10항목씩 출력
+    page_obj = paginator.get_page(page)
+    context = {"question_list" : page_obj}
     return render(request, "myapp/question_list.html", context)
 
 #질문 상세 내용 화면

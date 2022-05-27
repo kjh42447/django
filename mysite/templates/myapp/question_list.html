@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load myapp_filter %}
 {% block content %}
 
 <div class="container my-3">
@@ -14,11 +15,11 @@
             {% if question_list %}
             {% for question in question_list %}
             <tr>
-                <td>{{ forloop.counter }}</td>
+                <td>{{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1 }}</td>      <!--번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1-->
                 <td>
-                    <a href="{% url 'myapp:detail' question.id %}">{{ question.subject }}</a>
+                    <a href="{% url 'myapp:detail' question.id %}">{{ question.subject }}</a>       <!--제목-->
                 </td>
-                <td>{{ question.create_date }}</td>
+                <td>{{ question.create_date }}</td>     <!--작성일지-->
             </tr>
             {% endfor %}
             {% else %}

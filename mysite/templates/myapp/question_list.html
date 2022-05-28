@@ -18,6 +18,9 @@
                 <td>{{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1 }}</td>      <!--번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1-->
                 <td>
                     <a href="{% url 'myapp:detail' question.id %}">{{ question.subject }}</a>       <!--제목-->
+                    {% if question.answer_set.count > 0 %}
+                    <span class="text-danger small mx-2">{{ question.answer_set.count }}</span>
+                    {% endif %}
                 </td>
                 <td>{{ question.create_date }}</td>     <!--작성일지-->
             </tr>

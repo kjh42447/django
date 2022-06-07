@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from myapp import views
+from myapp.views import base_views
 
 #url 매핑 시 항상 마지막에 '/' 붙여줄 것
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('myapp/', include('myapp.urls')),
     path('common/', include('common.urls')),
-    path('', views.index, name='index'),    #'/'에 해당되는 path
+    path('', base_views.index, name='index'),    #'/'에 해당되는 path
 ]

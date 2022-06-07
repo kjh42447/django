@@ -28,6 +28,16 @@ def answer_create(request, question_id):
     context = {'question': question, 'form': form}
     return render(request, 'myapp/question_detail.html', context)    
 
+#답변 추천 화면
+@login_required(login_url='common:login')
+def answer_vote(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id)
+    if request.user == answer.author:
+        messages.error(request, '본인이 작성한 글은 추천할 수 없습니다')
+    else:
+        answer.voter.add(request.user)
+    return redirect('myapp:detail', question_id=answer.question.id)
+
 #답변 수정 화면
 @login_required(login_url='common:login')
 def answer_modify(request, answer_id):

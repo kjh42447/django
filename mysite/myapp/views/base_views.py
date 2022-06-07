@@ -1,6 +1,8 @@
 #가상환경 접속 : E:\backend\django\mysite>mysite.cmd
 #가상환경 종료 : deactivate
 #주석 단축키 : ctrl + /
+#admin / 1111
+#user2 / passworduser2!
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 

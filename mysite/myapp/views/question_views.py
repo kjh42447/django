@@ -27,6 +27,16 @@ def question_create(request):
     context = {'form': form}
     return render(request, 'myapp/question_form.html', context)
 
+#질문 추천 회면
+@login_required(login_url='common:login')
+def question_vote(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user == question.author:
+        messages.error(request, '본인이 작성한 글은 추천할 수 없습니다')
+    else:
+        question.voter.add(request.user)
+    return redirect('myapp:detail', question_id=question.id)
+
 #질문 수정 화면
 @login_required(login_url='common:login')
 def question_modify(request, question_id):
